@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang='en'>
+
+
+<head>
+    <title>StarField</title>
+    <style>
+        body {
+            background-color: black;
+        }
+        
+        .star {
+            height: 4px;
+            width: 4px;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            border-radius: 45px;
+            background-color: lightpink;
+        }
+        
+        .star2 {
+            height: 4px;
+            width: 4px;
+            position: absolute;
+            top: 150px;
+            left: 150px;
+            border-radius: 45px;
+            background-color: cornflowerblue;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="show">
+        <span class="star"></span>
+        <span class="star2"></span>
+
+
+
+    </div>
+    <script>
+        function getRnd(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+
+
+        var pos_x = 0;
+        var pos_y = 0;
+        var xArray = [];
+        var yArray = [];
+
+        coordArray();
+
+        function coordArray() { //coordinate funtion to map our cooardinates for my array
+            var screenWidth = 1500;
+            var screenHeight = 600;
+            var max = 900; //how many things to show in array  my aray can hold up to 100 things
+            var starCount = getRnd(1, max);
+
+
+
+            for (var i = 0; i < starCount; i++) { //have to generate both arrays at the same time so we have two arrays with the same length
+                pos_x = getRnd(0, screenWidth); //returns some number for x to fall between 0 and 500 or whatever screenwidth is
+                xArray.push(pos_x); //pushes pos_x into the xArray
+                pos_y = getRnd(0, screenHeight); //returns some number for y to fall between 0 and 500 or whatever screenwidth is
+                yArray.push(pos_y); //pushes pos_y into the yArray
+
+
+
+            }
+            showStars(); //to garuntee coordArray runs before showStars 
+            console.log('pos_x\'s ' + xArray);
+            console.log('pos_y\'s ' + yArray);
+        }
+
+        function showStars() { //need to create a divs for the stars to appear into with ids so I can do stuff to them 
+            var newDiv = ''; //needs to be outside of the loop so it doesnt override and olnly show last star
+            for (var i = 0; i < xArray.length; i++) {
+
+                newDiv += '<div class="star" id="s_' + i + '" style="top:' + yArray[i] + 'px; left:' + xArray[i] + 'px"></div>';
+
+            }
+            document.getElementById("show").innerHTML = newDiv;
+        }
+
+
+
+
+
+
+        /*var arryl = 100;
+        var smArryL = 2;
+        var max = 100;
+
+        var starField = [];
+        rndArray(arryl, max)
+
+        function rndArray(arrl, max){
+                var x = 0;
+                for (var i = 0; i<arrl; i++){
+                  x = getRnd(0, max);  
+                starField.push(x);
+                }
+            console.log(starField);
+        }*/
+    </script>
+</body>
+
+</html>
